@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Breaking Bad - Extended.mp3-1b9dbd2b4a09e35cf411fed69f870bf3.mp3str"
+
+[deps]
+
+source_file="res://assets/Breaking Bad - Extended.mp3"
+dest_files=[ "res://.import/Breaking Bad - Extended.mp3-1b9dbd2b4a09e35cf411fed69f870bf3.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
