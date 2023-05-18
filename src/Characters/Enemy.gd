@@ -10,6 +10,7 @@ var target_position
 
 onready var sprite = $AnimatedSprite
 onready var player = get_parent().get_node("Player")
+#onready var player = get_node("res://src/Characters/Player.tscn")
 
 
 func _physics_process(delta):
@@ -34,4 +35,3 @@ func _follow_player():
 	
 	if position.distance_to(player_position) > 3:
 		move_and_slide(target_position * speed)
-

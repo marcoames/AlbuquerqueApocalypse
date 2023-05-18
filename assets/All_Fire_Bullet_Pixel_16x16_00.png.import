@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Icon2.png-bba80718b05044bff48dd0972a4a2ac7.stex"
+path="res://.import/All_Fire_Bullet_Pixel_16x16_00.png-dcb5e7b88c8a7453e17f0e58a2162dc6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Icon2.png"
-dest_files=[ "res://.import/Icon2.png-bba80718b05044bff48dd0972a4a2ac7.stex" ]
+source_file="res://assets/All_Fire_Bullet_Pixel_16x16_00.png"
+dest_files=[ "res://.import/All_Fire_Bullet_Pixel_16x16_00.png-dcb5e7b88c8a7453e17f0e58a2162dc6.stex" ]
 
 [params]
 
