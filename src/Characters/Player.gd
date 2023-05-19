@@ -6,6 +6,9 @@ var velocity = Vector2()
 onready var max_hp = 100
 onready var hp = max_hp
 
+onready var level = 1
+onready var xp = 0
+
 var atk_speed = 1
 var can_fire = true
 
@@ -25,28 +28,40 @@ func setHp(aux):
 func getHp():
 	return hp
 
-func collision():
-	for i in get_slide_count():
-		var collision = get_slide_collision(i)
-		#print("I collided with ", collision.collider.name)
-		setHp(-5)
+func setXp(aux):
+	xp = xp + aux
+
+func death():
+	sprite.play("death")
+
+
+#func collision():
+#	for i in get_slide_count():
+#		var collision = get_slide_collision(i)
+#		#print(collision.collider.name)
+#		if collision.collider.name == "zombie":
+#			setHp(-2)
 
 func shoot():
 	var bullet = bulletPath.instance()
 	get_parent().add_child(bullet)
-	bullet.position = get_global_position()
-	bullet.apply_impulse(Vector2(), Vector2(bullet.speed,0))
+	$bullet.play()
+	bullet.position = position
+	bullet.direction = (get_global_mouse_position() - global_position).normalized()
+	bullet.rotation = bullet.direction.angle()
 	can_fire = false
 	yield(get_tree().create_timer(atk_speed), "timeout")
 	can_fire = true
 
 func _process(delta):
-	collision()
-	if Input.is_action_just_pressed("fire") and can_fire:
+	#collision()
+	if can_fire:
+	#if Input.is_action_just_pressed("fire") and can_fire:
 		shoot()
 
 func _physics_process(delta):
-	handle_input()
+	if hp > 0:
+		handle_input()
 
 func handle_input():
 	velocity = Vector2()
@@ -62,9 +77,10 @@ func handle_input():
 		sprite.play("walk_left")	
 	elif velocity.x > 0:
 		sprite.play("walk_right")	
-	else: 
-		sprite.stop()
-		sprite.frame = 0
+	else:
+		if hp > 0: 
+			sprite.stop()
+			sprite.frame = 0
 		
 	velocity = velocity.normalized()
 	move_and_slide(velocity * speed)	

@@ -13,16 +13,21 @@ func spawn_zombie():
 	if can_spawn:
 		var zombie = zombie_path.instance()
 		add_child(zombie)
-		zombie.position = Vector2(randi()%100,randi()%100)
+		var pos = player.position
+		pos.x += rand_range(-1000,1000)
+		pos.y += rand_range(-600,600)		
+		zombie.position = pos
 		can_spawn = false
 		yield(get_tree().create_timer(2), "timeout")
 		can_spawn = true
 
 func _process(delta):
-	spawn_zombie()
-	pass
+	if can_spawn:
+		spawn_zombie()
 
-func _physics_process(delta: float) -> void:
-	if player.hp < 0:
+func _physics_process(delta):
+	if player.hp <= 0:
+		player.death()
+		yield(get_tree().create_timer(1.5), "timeout")
 		get_tree().change_scene("res://src/Game/GameOver.tscn")
 

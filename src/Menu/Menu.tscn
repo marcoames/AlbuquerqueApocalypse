@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/Captura de Tela 2023-04-05 às 17.55.38.png" type="Texture" id=1]
 [ext_resource path="res://src/Menu/Menu.gd" type="Script" id=2]
-[ext_resource path="res://assets/Breaking Bad - Extended.mp3" type="AudioStream" id=3]
+[ext_resource path="res://assets/short_intro.mp3" type="AudioStream" id=3]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
