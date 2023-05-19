@@ -19,7 +19,6 @@ func _follow_player(delta):
 	player_position = player.position
 	target_position = (player_position - position).normalized()
 	
-	
 	if target_position.x < 0:
 		sprite.play("walk_left")	
 	elif target_position.x > 0:
@@ -36,4 +35,4 @@ func _follow_player(delta):
 		#move_and_slide(target_position * speed)
 		var collision_info = move_and_collide(target_position * speed * delta)
 		if collision_info != null and collision_info.collider == player:
-			collision_info.collider.setHp(-2)
+			collision_info.collider.setHp(-1)

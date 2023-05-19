@@ -15,7 +15,6 @@ var can_fire = true
 onready var sprite = $AnimatedSprite
 const bulletPath = preload("res://src/Game/Bullet.tscn")
 
-
 func setSpeed(aux):
 	speed = speed + aux
 	
@@ -30,17 +29,22 @@ func getHp():
 
 func setXp(aux):
 	xp = xp + aux
+	if xp >= 100:
+		level += 1
+		xp = 0
+		if atk_speed > 0.21:
+			atk_speed -= 0.1
+		setSpeed(1)
+		setMaxHp(10)
 
 func death():
 	sprite.play("death")
 
-
 #func collision():
 #	for i in get_slide_count():
 #		var collision = get_slide_collision(i)
-#		#print(collision.collider.name)
-#		if collision.collider.name == "zombie":
-#			setHp(-2)
+#		#print(collision.collider.name)	
+#		setHp(-2)
 
 func shoot():
 	var bullet = bulletPath.instance()
@@ -55,8 +59,7 @@ func shoot():
 
 func _process(delta):
 	#collision()
-	if can_fire:
-	#if Input.is_action_just_pressed("fire") and can_fire:
+	if can_fire and hp > 0:
 		shoot()
 
 func _physics_process(delta):

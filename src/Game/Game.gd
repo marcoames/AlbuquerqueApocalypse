@@ -8,6 +8,7 @@ onready var player := $Player
 
 const zombie_path = preload("res://src/Characters/Zombie.tscn")
 var can_spawn = true
+var spawn_timer = 1
 
 func spawn_zombie():
 	if can_spawn:
@@ -18,7 +19,9 @@ func spawn_zombie():
 		pos.y += rand_range(-600,600)		
 		zombie.position = pos
 		can_spawn = false
-		yield(get_tree().create_timer(2), "timeout")
+		yield(get_tree().create_timer(spawn_timer), "timeout")
+		if spawn_timer > 0.2:
+			spawn_timer -= 0.0050
 		can_spawn = true
 
 func _process(delta):
