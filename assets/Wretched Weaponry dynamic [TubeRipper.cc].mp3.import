@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Wretched Weaponry dynamic [TubeRipper.cc].mp3-ed6ac61124e72db739d0cd4f593fa911.mp3str"
+
+[deps]
+
+source_file="res://assets/Wretched Weaponry dynamic [TubeRipper.cc].mp3"
+dest_files=[ "res://.import/Wretched Weaponry dynamic [TubeRipper.cc].mp3-ed6ac61124e72db739d0cd4f593fa911.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

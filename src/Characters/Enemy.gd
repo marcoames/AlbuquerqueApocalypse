@@ -2,6 +2,7 @@ extends KinematicBody2D
 class_name Enemy
 
 var speed = 80
+var damage = 1
 var velocity = Vector2()
 
 var player_position
@@ -10,6 +11,11 @@ var target_position
 onready var sprite = $AnimatedSprite
 onready var player = get_parent().get_node("Player")
 #onready var player = get_node("res://src/Characters/Player.tscn")
+
+onready var hp_bar = get_parent().get_node("HUD").get_child(3)
+func setHpBar(set_value = 1, set_max_value = 100):
+	hp_bar.value += set_value
+	hp_bar.max_value = set_max_value
 
 
 func _physics_process(delta):
@@ -32,7 +38,9 @@ func _follow_player(delta):
 		sprite.frame = 0	
 	
 	if position.distance_to(player_position) > 3:
-		#move_and_slide(target_position * speed)
+		#var collision_info = move_and_slide(target_position * speed)
 		var collision_info = move_and_collide(target_position * speed * delta)
 		if collision_info != null and collision_info.collider == player:
-			collision_info.collider.setHp(-1)
+			setHpBar(damage,100)
+			collision_info.collider.setHp(-damage)
+			print(player.hp)

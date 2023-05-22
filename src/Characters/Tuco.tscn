@@ -245,6 +245,7 @@ animations = [ {
 } ]
 
 [node name="Tuco" type="KinematicBody2D"]
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -254,3 +255,5 @@ shape = SubResource( 45 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 55 )
 animation = "death"
+
+[node name="spawn" type="AudioStreamPlayer" parent="."]
