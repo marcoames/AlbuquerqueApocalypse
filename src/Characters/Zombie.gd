@@ -10,5 +10,7 @@ func setHP(aux):
 
 func _process(_delta):
 	if hp <= 0:
+		$AudioStreamPlayer2D.play()
 		player.setXp(rand_range(5,10))
+		#player.setXp(101)
 		queue_free()

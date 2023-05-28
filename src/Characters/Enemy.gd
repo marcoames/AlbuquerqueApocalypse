@@ -2,7 +2,7 @@ extends KinematicBody2D
 class_name Enemy
 
 var speed = 80
-var damage = 1
+var damage = 0.5
 var velocity = Vector2()
 
 var player_position
@@ -43,4 +43,4 @@ func _follow_player(delta):
 		if collision_info != null and collision_info.collider == player:
 			setHpBar(damage,100)
 			collision_info.collider.setHp(-damage)
-			print(player.hp)
+			#print(player.hp)

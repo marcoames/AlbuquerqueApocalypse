@@ -26,37 +26,37 @@ func setHp(aux):
 
 func getHp():
 	return hp
+	
+func setLvl(aux):
+	level += aux
+	$level_up.play()
+	xp_level_label.text = str("LVL: ", level)
+
 
 func setXp(aux):
 	xp = xp + aux
-	xp_level_label.text = str("LVL: ", level)
-	setXpBar(xp, 100)
 	if xp >= 100:
-		level += 1
-		xp = 0
-		if atk_speed > 0.21:
-			atk_speed -= 0.05
+		#level +=1
+		setLvl(1)
+		xp = xp -100
+		#$level_up.play()
+
+		if atk_speed > 0.24:
+			atk_speed -= 0.1
 		#setSpeed(1)
 		#setMaxHp(10)
+	setXpBar(xp, 100)	
+	xp_level_label.text = str("LVL: ", level)
 
 onready var xp_bar = get_parent().get_node("HUD").get_child(1)
 onready var xp_level_label = get_parent().get_node("HUD").get_child(2)
-
-
 
 func setXpBar(set_value = 1, set_max_value = 100):
 	xp_bar.value = set_value
 	xp_bar.max_value = set_max_value
 
-
 func death():
 	sprite.play("death")
-
-#func collision():
-#	for i in get_slide_count():
-#		var collision = get_slide_collision(i)
-#		#print(collision.collider.name)	
-#		setHp(-1)
 
 func shoot():
 	var bullet = bulletPath.instance()
@@ -70,7 +70,6 @@ func shoot():
 	can_fire = true
 
 func _process(_delta):
-	#collision()
 	if can_fire and hp > 0:
 		shoot()
 
@@ -99,4 +98,3 @@ func handle_input():
 		
 	velocity = velocity.normalized()
 	move_and_slide(velocity * speed)	
-	#collision()

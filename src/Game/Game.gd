@@ -8,15 +8,61 @@ onready var player := $Player
 
 const zombie_path = preload("res://src/Characters/Zombie.tscn")
 const tuco_path = preload("res://src/Characters/Tuco.tscn")
+
+const item_path = preload("res://src/Game/Item.tscn")
+
 var can_spawn = true
 var spawn_timer = 1
 
+var item_spawn = true
+
 onready var timer= $HUD.get_child(0)
+
+
+func spawn_item():
+	if item_spawn:
+		var item = item_path.instance()
+		add_child(item)
+		var pos = player.position
+		
+		# SPAWN NOS CANTOS DA TELA
+		var vpr = get_viewport().size * rand_range(1.1,1.4)
+		var top_left = Vector2(player.global_position.x - vpr.x/2, player.global_position.y - vpr.y/2)
+		var top_right = Vector2(player.global_position.x + vpr.x/2, player.global_position.y - vpr.y/2)
+		var bottom_left = Vector2(player.global_position.x - vpr.x/2, player.global_position.y + vpr.y/2)
+		var bottom_right = Vector2(player.global_position.x + vpr.x/2, player.global_position.y + vpr.y/2)
+		var sides = [1,2,3,4]
+		var pos_side = sides[randi() % sides.size()]
+		var pos1 = Vector2.ZERO
+		var pos2 = Vector2.ZERO
+		
+		match pos_side:
+			1:
+				pos1 = top_left
+				pos2 = top_right
+			2:
+				pos1 = bottom_left
+				pos2 = bottom_right
+			3:
+				pos1 = top_left
+				pos2 = bottom_left
+			4:
+				pos1 = top_right
+				pos2 = bottom_right			
+				
+		
+		pos.x = rand_range(pos1.x,pos2.x)
+		pos.y = rand_range(pos1.y,pos2.y)
+		
+		item.position = pos
+		item_spawn = false
+		yield(get_tree().create_timer(10), "timeout")
+		item_spawn = true
 
 func spawn_boss():
 	#var x = rand_range(0,100)
 	#print(timer.getTime())
-	if timer.getTime() > 60 and timer.getTime() < 61:
+	if timer.getTime() > 60 and timer.getTime() < 60.5:
 		var tuco = tuco_path.instance()
 		add_child(tuco)
 		var pos = player.position
@@ -46,7 +92,6 @@ func spawn_boss():
 				pos1 = top_right
 				pos2 = bottom_right			
 				
-		
 		pos.x = rand_range(pos1.x,pos2.x)
 		pos.y = rand_range(pos1.y,pos2.y)
 		
@@ -99,6 +144,8 @@ func _process(_delta):
 	if can_spawn:
 		spawn_zombie()
 		spawn_boss()
+	if item_spawn:
+		spawn_item()	
 
 func _physics_process(_delta):
 	if player.hp <= 0:

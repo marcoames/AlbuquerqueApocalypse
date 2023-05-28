@@ -10,5 +10,5 @@ func setHP(aux):
 
 func _process(_delta):
 	if hp <= 0:
-		player.setXp(100)
+		player.setLvl(3)
 		queue_free()
