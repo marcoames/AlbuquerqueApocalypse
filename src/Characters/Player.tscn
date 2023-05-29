@@ -1,9 +1,10 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://assets/nier_automata_effect.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/Characters/Player.gd" type="Script" id=2]
 [ext_resource path="res://assets/Sprite_Walter.png" type="Texture" id=3]
 [ext_resource path="res://assets/GunShotSnglShotIn PE1097906.mp3" type="AudioStream" id=4]
+[ext_resource path="res://src/Characters/bullet_sound.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=45]
 extents = Vector2( 10, 22 )
@@ -264,7 +265,8 @@ current = true
 [node name="level_up" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 
-[node name="bullet" type="AudioStreamPlayer" parent="."]
+[node name="bullet_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -10.0
 pitch_scale = 2.0
+script = ExtResource( 5 )

@@ -14,6 +14,7 @@ var can_fire = true
 
 onready var sprite = $AnimatedSprite
 const bulletPath = preload("res://src/Game/Bullet.tscn")
+const bulletWidePath = preload("res://src/Game/BulletWide.tscn")
 
 func setSpeed(aux):
 	speed = speed + aux
@@ -31,6 +32,9 @@ func setLvl(aux):
 	level += aux
 	$level_up.play()
 	xp_level_label.text = str("LVL: ", level)
+
+func getLvl():
+	return level
 
 
 func setXp(aux):
@@ -60,8 +64,13 @@ func death():
 
 func shoot():
 	var bullet = bulletPath.instance()
+	
+	if level >= 10:
+		bullet = bulletWidePath.instance()
+		$bullet_sound.setPitch(0.8,1)
+			
 	get_parent().add_child(bullet)
-	$bullet.play()
+	$bullet_sound.play()
 	bullet.position = position
 	bullet.direction = (get_global_mouse_position() - global_position).normalized()
 	bullet.rotation = bullet.direction.angle()

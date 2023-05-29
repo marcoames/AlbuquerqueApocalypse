@@ -18,13 +18,7 @@ func setHpBar(set_value = 1, set_max_value = 100):
 	hp_bar.max_value = set_max_value
 
 
-func _physics_process(delta):
-	_follow_player(delta)
-
-func _follow_player(delta):
-	player_position = player.position
-	target_position = (player_position - position).normalized()
-	
+func animation():
 	if target_position.x < 0:
 		sprite.play("walk_left")	
 	elif target_position.x > 0:
@@ -36,6 +30,19 @@ func _follow_player(delta):
 	else:
 		sprite.stop()
 		sprite.frame = 0	
+
+
+func _physics_process(delta):
+	_follow_player(delta)
+
+
+
+func _follow_player(delta):
+	player_position = player.position
+	target_position = (player_position - position).normalized()
+	
+	animation()
+	
 	
 	if position.distance_to(player_position) > 3:
 		#var collision_info = move_and_slide(target_position * speed)
