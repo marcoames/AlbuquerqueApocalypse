@@ -34,15 +34,13 @@ func animation():
 
 func _physics_process(delta):
 	_follow_player(delta)
-
-
+	
 
 func _follow_player(delta):
 	player_position = player.position
 	target_position = (player_position - position).normalized()
 	
 	animation()
-	
 	
 	if position.distance_to(player_position) > 3:
 		#var collision_info = move_and_slide(target_position * speed)

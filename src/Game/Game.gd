@@ -19,7 +19,6 @@ var item_spawn = true
 
 onready var timer= $HUD.get_child(0)
 
-
 func spawn_item():
 	if item_spawn:
 		var item = item_path.instance()
@@ -98,7 +97,6 @@ func spawn_boss():
 		
 		tuco.position = pos
 		can_spawn_boss = false
-
 
 func spawn_zombie():
 	

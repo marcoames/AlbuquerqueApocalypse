@@ -65,7 +65,7 @@ func death():
 func shoot():
 	var bullet = bulletPath.instance()
 	
-	if level >= 10:
+	if level >= 1:
 		bullet = bulletWidePath.instance()
 		$bullet_sound.setPitch(0.8,1)
 			
