@@ -270,3 +270,7 @@ stream = ExtResource( 4 )
 volume_db = -10.0
 pitch_scale = 2.0
 script = ExtResource( 5 )
+
+[node name="death_sound" type="AudioStreamPlayer" parent="."]
+
+[node name="I_am_danger" type="AudioStreamPlayer" parent="."]

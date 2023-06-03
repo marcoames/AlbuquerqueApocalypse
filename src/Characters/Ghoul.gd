@@ -1,6 +1,6 @@
 extends Enemy
 
-var hp = 100
+var hp = 500
 
 func setHP(aux):
 	hp -= aux

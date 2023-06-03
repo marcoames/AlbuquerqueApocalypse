@@ -4,7 +4,7 @@ var time = 0
 var timer_on = true
 
 func getTime():
-	return time
+	return "%02d" % time
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,7 +15,7 @@ func _ready() -> void:
 func _process(delta) :
 	if (timer_on):
 		time += delta
-	
+		
 	var secs = fmod(time,60)
 	var mins = fmod(time, 60 * 60) / 60
 	

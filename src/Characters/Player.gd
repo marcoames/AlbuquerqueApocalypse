@@ -16,6 +16,10 @@ onready var sprite = $AnimatedSprite
 const bulletPath = preload("res://src/Game/Bullet.tscn")
 const bulletWidePath = preload("res://src/Game/BulletWide.tscn")
 
+
+func stats_update():
+	pass
+
 func setSpeed(aux):
 	speed = speed + aux
 	
@@ -36,13 +40,17 @@ func setLvl(aux):
 func getLvl():
 	return level
 
-
 func setXp(aux):
 	xp = xp + aux
 	if xp >= 100:
-		#level +=1
 		setLvl(1)
 		xp = xp -100
+		if level == 10:
+			$I_am_danger.play()
+		
+		# update window
+		stats_update()
+		
 		#$level_up.play()
 
 		if atk_speed > 0.24:
@@ -60,12 +68,13 @@ func setXpBar(set_value = 1, set_max_value = 100):
 	xp_bar.max_value = set_max_value
 
 func death():
+	$death_sound.play()
 	sprite.play("death")
 
 func shoot():
 	var bullet = bulletPath.instance()
 	
-	if level >= 1:
+	if level >= 10:
 		bullet = bulletWidePath.instance()
 		$bullet_sound.setPitch(0.8,1)
 			
