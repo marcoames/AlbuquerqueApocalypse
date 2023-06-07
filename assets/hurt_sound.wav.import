@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/zombie_growl.wav-e61a4dde16358d5e5189e4f6aac887fe.sample"
+path="res://.import/hurt_sound.wav-455e9cf6609b3dbdbf7a1cb296c36806.sample"
 
 [deps]
 
-source_file="res://assets/zombie_growl.wav"
-dest_files=[ "res://.import/zombie_growl.wav-e61a4dde16358d5e5189e4f6aac887fe.sample" ]
+source_file="res://assets/hurt_sound.wav"
+dest_files=[ "res://.import/hurt_sound.wav-455e9cf6609b3dbdbf7a1cb296c36806.sample" ]
 
 [params]
 

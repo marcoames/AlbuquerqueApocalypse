@@ -2,7 +2,7 @@ extends Enemy
 
 var hp = 500
 
-func setHP(aux):
+func setHp(aux):
 	hp -= aux
 	
 func _process(_delta):

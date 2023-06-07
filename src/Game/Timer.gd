@@ -3,9 +3,12 @@ extends Label
 var time = 0
 var timer_on = true
 
-func getTime():
+func getTimeString():
 	return "%02d" % time
-
+	
+func getTime():
+	return time	
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_process(time)

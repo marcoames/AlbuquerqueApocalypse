@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/zombie_growl.wav-e61a4dde16358d5e5189e4f6aac887fe.sample"
+path="res://.import/the_danger.wav-587e889a4e1146cdc38282925c58e2e2.sample"
 
 [deps]
 
-source_file="res://assets/zombie_growl.wav"
-dest_files=[ "res://.import/zombie_growl.wav-e61a4dde16358d5e5189e4f6aac887fe.sample" ]
+source_file="res://assets/the_danger.wav"
+dest_files=[ "res://.import/the_danger.wav-587e889a4e1146cdc38282925c58e2e2.sample" ]
 
 [params]
 

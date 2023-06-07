@@ -3,6 +3,8 @@ extends KinematicBody2D
 var speed = 100
 var velocity = Vector2()
 
+onready var killed_boss = false
+
 onready var max_hp = 100
 onready var hp = max_hp
 
@@ -16,12 +18,31 @@ onready var sprite = $AnimatedSprite
 const bulletPath = preload("res://src/Game/Bullet.tscn")
 const bulletWidePath = preload("res://src/Game/BulletWide.tscn")
 
+onready var levelPanel = get_parent().get_node("HUD").get_child(4)
+onready var upgradeOptions = levelPanel.get_child(1)
 
-func stats_update():
+func boss_kill():
+	killed_boss = true
+
+func level_upgrade():
+	$level_up.play()
+	levelPanel.visible = true
+	get_tree().paused = true
 	pass
 
-func setSpeed(aux):
-	speed = speed + aux
+
+func setAtk_speed():
+	if atk_speed >= 0.25:
+			atk_speed -= 0.1
+	levelPanel.visible = false
+	get_tree().paused = false
+
+func setMov_speed():
+	if speed <= 10:
+		speed = speed + 1
+	levelPanel.visible = false
+	get_tree().paused = false
+	
 	
 func setMaxHp(aux):
 	max_hp = max_hp + aux
@@ -34,7 +55,7 @@ func getHp():
 	
 func setLvl(aux):
 	level += aux
-	$level_up.play()
+	#$level_up.play()
 	xp_level_label.text = str("LVL: ", level)
 
 func getLvl():
@@ -45,17 +66,14 @@ func setXp(aux):
 	if xp >= 100:
 		setLvl(1)
 		xp = xp -100
-		if level == 10:
-			$I_am_danger.play()
+		#if level == 10:
+			#$I_am_danger.play()
 		
 		# update window
-		stats_update()
-		
-		#$level_up.play()
+		level_upgrade()
 
-		if atk_speed > 0.24:
-			atk_speed -= 0.1
-		#setSpeed(1)
+		#if atk_speed > 0.24:
+		#	atk_speed -= 0.1
 		#setMaxHp(10)
 	setXpBar(xp, 100)	
 	xp_level_label.text = str("LVL: ", level)
@@ -74,7 +92,7 @@ func death():
 func shoot():
 	var bullet = bulletPath.instance()
 	
-	if level >= 10:
+	if level >= 10 and killed_boss:
 		bullet = bulletWidePath.instance()
 		$bullet_sound.setPitch(0.8,1)
 			

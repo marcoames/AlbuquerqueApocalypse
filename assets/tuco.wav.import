@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/zombie_growl.wav-e61a4dde16358d5e5189e4f6aac887fe.sample"
+path="res://.import/tuco.wav-3a82f37f0083ac7f14cbfc7f151b2c92.sample"
 
 [deps]
 
-source_file="res://assets/zombie_growl.wav"
-dest_files=[ "res://.import/zombie_growl.wav-e61a4dde16358d5e5189e4f6aac887fe.sample" ]
+source_file="res://assets/tuco.wav"
+dest_files=[ "res://.import/tuco.wav-3a82f37f0083ac7f14cbfc7f151b2c92.sample" ]
 
 [params]
 

@@ -13,10 +13,9 @@ var can_spawn_boss = true
 var spawn_timer = 1
 var item_spawn = true
 
-onready var timer= $HUD.get_child(0)
+var tuco
 
-onready var ground = $pathfinding/ground
-onready var pathfinding = $pathfinding
+onready var timer= $HUD.get_child(0)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -65,7 +64,7 @@ func spawn_item():
 
 func spawn_boss():
 
-	var tuco = tuco_path.instance()
+	tuco = tuco_path.instance()
 	add_child(tuco)
 	var pos = player.position
 	
@@ -102,7 +101,7 @@ func spawn_boss():
 func spawn_enemy():
 	
 	var enemy = zombie_path.instance()
-	if timer.getTime() > "75":
+	if timer.getTime() > 80 and not is_instance_valid(tuco):
 		enemy = ghoul_path.instance()
 	
 	add_child(enemy)
@@ -145,7 +144,7 @@ func spawn_enemy():
 	can_spawn = true
 
 func _process(_delta):
-	if timer.getTime() == "60" and can_spawn_boss:
+	if timer.getTimeString() == "60" and can_spawn_boss:
 		spawn_boss()
 		can_spawn_boss = false
 	if can_spawn:

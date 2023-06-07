@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Water Tileset.png-97588f7302b6b591b58d6d49b41dce82.stex"
+path="res://.import/BloodOverlay.png-7aa63beab247fc5836aaf1e7b4629de7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Forest BETA V2/Water Tileset.png"
-dest_files=[ "res://.import/Water Tileset.png-97588f7302b6b591b58d6d49b41dce82.stex" ]
+source_file="res://assets/BloodOverlay.png"
+dest_files=[ "res://.import/BloodOverlay.png-7aa63beab247fc5836aaf1e7b4629de7.stex" ]
 
 [params]
 
