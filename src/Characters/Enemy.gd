@@ -23,7 +23,6 @@ func setHpBar(set_value = 1, set_max_value = 100):
 	hp_bar.value += set_value
 	hp_bar.max_value = set_max_value
 
-
 func animation():
 	if target_position.x < 0:
 		sprite.play("walk_left")	
@@ -37,10 +36,8 @@ func animation():
 		sprite.stop()
 		sprite.frame = 0	
 
-
 func _physics_process(delta):
 	_follow_player(delta)
-
 
 func _follow_player(delta):
 	player_position = player.position
@@ -56,8 +53,6 @@ func _follow_player(delta):
 			collision_info.collider.setHp(-damage)
 			if player.getHp() > 0:
 				hurt.play()
-				camera.shake(0.2,1)
+				camera.shake(0.2,1.5)
 				rectPlayer.play("fade")
 				
-				
-			#print(player.hp)

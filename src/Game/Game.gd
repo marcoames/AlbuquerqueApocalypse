@@ -2,23 +2,25 @@ extends Node
 
 onready var player := $Player
 
+const game_over = preload("res://src/Game/GameOver.tscn")
+onready var gameInstance = game_over.instance()
+
 const zombie_path = preload("res://src/Characters/Zombie.tscn")
 const ghoul_path = preload("res://src/Characters/Ghoul.tscn")
 const tuco_path = preload("res://src/Characters/Tuco.tscn")
-
 const item_path = preload("res://src/Game/Item.tscn")
+
+onready var timer= $HUD.get_child(0)
+
+onready var score = 0
+onready var highscore = 0
 
 var can_spawn = true
 var can_spawn_boss = true
 var spawn_timer = 1
 var item_spawn = true
-
 var tuco
 
-onready var timer= $HUD.get_child(0)
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
 
@@ -101,6 +103,7 @@ func spawn_boss():
 func spawn_enemy():
 	
 	var enemy = zombie_path.instance()
+	#80
 	if timer.getTime() > 80 and not is_instance_valid(tuco):
 		enemy = ghoul_path.instance()
 	
@@ -144,6 +147,7 @@ func spawn_enemy():
 	can_spawn = true
 
 func _process(_delta):
+	#60
 	if timer.getTimeString() == "60" and can_spawn_boss:
 		spawn_boss()
 		can_spawn_boss = false
@@ -155,6 +159,5 @@ func _process(_delta):
 func _physics_process(_delta):
 	if player.hp <= 0:
 		player.death()
-		yield(get_tree().create_timer(1.5), "timeout")
-		get_tree().change_scene("res://src/Game/GameOver.tscn")
-
+		yield(get_tree().create_timer(1.5), "timeout")	
+		get_tree().change_scene_to(game_over)

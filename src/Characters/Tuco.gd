@@ -10,6 +10,13 @@ func _ready():
 func setHp(aux):
 	hp -= aux
 	
+func flash():
+	$AnimatedSprite/AnimationPlayer.play("Hit")
+	
+func weapon_hit():
+	#play weapon_hit
+	pass	
+	
 func _process(_delta):
 	if hp <= 0:
 		player.boss_kill()

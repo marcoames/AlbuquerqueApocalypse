@@ -21,6 +21,9 @@ const bulletWidePath = preload("res://src/Game/BulletWide.tscn")
 onready var levelPanel = get_parent().get_node("HUD").get_child(4)
 onready var upgradeOptions = levelPanel.get_child(1)
 
+onready var xp_bar = get_parent().get_node("HUD").get_child(1)
+onready var xp_level_label = get_parent().get_node("HUD").get_child(2)
+
 func boss_kill():
 	killed_boss = true
 
@@ -30,7 +33,6 @@ func level_upgrade():
 	get_tree().paused = true
 	pass
 
-
 func setAtk_speed():
 	if atk_speed >= 0.25:
 			atk_speed -= 0.1
@@ -38,11 +40,10 @@ func setAtk_speed():
 	get_tree().paused = false
 
 func setMov_speed():
-	if speed <= 10:
-		speed = speed + 1
+	if speed <= 500:
+		speed = speed + 10
 	levelPanel.visible = false
 	get_tree().paused = false
-	
 	
 func setMaxHp(aux):
 	max_hp = max_hp + aux
@@ -55,7 +56,6 @@ func getHp():
 	
 func setLvl(aux):
 	level += aux
-	#$level_up.play()
 	xp_level_label.text = str("LVL: ", level)
 
 func getLvl():
@@ -66,20 +66,10 @@ func setXp(aux):
 	if xp >= 100:
 		setLvl(1)
 		xp = xp -100
-		#if level == 10:
-			#$I_am_danger.play()
-		
-		# update window
 		level_upgrade()
 
-		#if atk_speed > 0.24:
-		#	atk_speed -= 0.1
-		#setMaxHp(10)
 	setXpBar(xp, 100)	
 	xp_level_label.text = str("LVL: ", level)
-
-onready var xp_bar = get_parent().get_node("HUD").get_child(1)
-onready var xp_level_label = get_parent().get_node("HUD").get_child(2)
 
 func setXpBar(set_value = 1, set_max_value = 100):
 	xp_bar.value = set_value
@@ -92,7 +82,8 @@ func death():
 func shoot():
 	var bullet = bulletPath.instance()
 	
-	if level >= 10 and killed_boss:
+	#if level >= 10 and killed_boss:
+	if killed_boss:
 		bullet = bulletWidePath.instance()
 		$bullet_sound.setPitch(0.8,1)
 			

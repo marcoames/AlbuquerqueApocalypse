@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://src/Characters/Ghoul.gd" type="Script" id=1]
 [ext_resource path="res://assets/Sprite_Zombie.png" type="Texture" id=2]
@@ -6,6 +6,23 @@
 
 [sub_resource type="RectangleShape2D" id=45]
 extents = Vector2( 14, 22.5 )
+
+[sub_resource type="Shader" id=50]
+code = "shader_type canvas_item;
+
+uniform vec4 flash_color : hint_color = vec4(1.0);
+uniform float flash_modifier : hint_range(0.0, 1.0) = 0.0;
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=51]
+shader = SubResource( 50 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_modifier = 0.0
 
 [sub_resource type="AtlasTexture" id=39]
 flags = 4
@@ -245,6 +262,37 @@ animations = [ {
 "speed": 9.0
 } ]
 
+[sub_resource type="Animation" id=48]
+resource_name = "Hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.75, 0.0 ]
+}
+
+[sub_resource type="Animation" id=49]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
 [sub_resource type="RectangleShape2D" id=47]
 extents = Vector2( 15, 23.5 )
 
@@ -258,8 +306,13 @@ shape = SubResource( 45 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 modulate = Color( 1, 0.294118, 0.294118, 1 )
+material = SubResource( 51 )
 frames = SubResource( 46 )
 animation = "death"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite"]
+anims/Hit = SubResource( 48 )
+anims/RESET = SubResource( 49 )
 
 [node name="Hitbox_ghoul" parent="." instance=ExtResource( 3 )]
 
