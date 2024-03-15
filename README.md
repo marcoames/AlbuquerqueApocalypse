@@ -1,2 +1,2 @@
 # AlbuquerqueApocalypse
-Jogo 2D no estilo roguelike shoot'em up desenvolvido na engine Godot.
+A 2D roguelike shoot'em up game set in the Breaking Bad universe with unique twists, developed using the Godot engine.
